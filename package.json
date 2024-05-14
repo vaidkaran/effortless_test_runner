@@ -1,0 +1,24 @@
+{
+  "name": "effortless_test_runner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node ./runTest.js"
+  },
+  "author": "Karan Vaid",
+  "license": "ISC",
+  "bin": {
+    "effortless_test": "./index.js"
+  },
+  "dependencies": {
+    "chai": "^5.1.0",
+    "commander": "^12.0.0",
+    "effortless_test_utils": "file:../effortless_test_utils",
+    "flat": "^6.0.1",
+    "lodash": "^4.17.21",
+    "mocha": "^10.3.0",
+    "mochawesome": "^7.1.3"
+  }
+}

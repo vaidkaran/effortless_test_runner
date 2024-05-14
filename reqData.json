@@ -1,0 +1,291 @@
+{
+  "selectedReqId": "req2",
+  "req1": {
+      "label": "Req1",
+      "test": false,
+      "testname": "",
+      "method": "GET",
+      "url": "{{env.jsonPlaceholderUrl}}/users/1",
+      "headers": [
+          {
+              "name": "Content-Type",
+              "value": "application/json"
+          }
+      ],
+      "queryParams": [],
+      "reqBody": "",
+      "resBody": {
+          "id": 1,
+          "name": "Leanne Graham",
+          "username": "Bret",
+          "email": "Sincere@april.biz",
+          "address": {
+              "street": "Kulas Light",
+              "suite": "Apt. 556",
+              "city": "Gwenborough",
+              "zipcode": "92998-3874",
+              "geo": {
+                  "lat": "-37.3159",
+                  "lng": "81.1496"
+              }
+          },
+          "phone": "1-770-736-8031 x56442",
+          "website": "hildegard.org",
+          "company": {
+              "name": "Romaguera-Crona",
+              "catchPhrase": "Multi-layered client-server neural-net",
+              "bs": "harness real-time e-markets"
+          }
+      },
+      "resCode": 200,
+      "resHeaders": {
+          "cache-control": "max-age=43200",
+          "content-type": "application/json; charset=utf-8",
+          "expires": "-1",
+          "pragma": "no-cache"
+      },
+      "parentPaths": {
+          "root": {
+              "verified": true,
+              "explicit": false
+          },
+          "root.address": {
+              "verified": false
+          },
+          "root.address.geo": {
+              "verified": false
+          },
+          "root.company": {
+              "verified": false
+          }
+      },
+      "variablePaths": {
+          "root.id": {
+              "saved": true,
+              "verified": false,
+              "parentPath": "root",
+              "variable": {
+                  "name": "id",
+                  "value": 1,
+                  "type": "integer"
+              }
+          },
+          "root.name": {
+              "saved": false,
+              "verified": true,
+              "parentPath": "root",
+              "variable": {
+                  "name": "name",
+                  "value": "Leanne Graham",
+                  "type": "string"
+              }
+          },
+          "root.username": {
+              "saved": false,
+              "verified": true,
+              "parentPath": "root",
+              "variable": {
+                  "name": "username",
+                  "value": "Brett",
+                  "type": "string"
+              }
+          },
+          "root.email": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root",
+              "variable": {
+                  "name": "email",
+                  "value": "Sincere@april.biz",
+                  "type": "string"
+              }
+          },
+          "root.address.street": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root.address",
+              "variable": {
+                  "name": "street",
+                  "value": "Kulas Light",
+                  "type": "string"
+              }
+          },
+          "root.address.suite": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root.address",
+              "variable": {
+                  "name": "suite",
+                  "value": "Apt. 556",
+                  "type": "string"
+              }
+          },
+          "root.address.city": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root.address",
+              "variable": {
+                  "name": "city",
+                  "value": "Gwenborough",
+                  "type": "string"
+              }
+          },
+          "root.address.zipcode": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root.address",
+              "variable": {
+                  "name": "zipcode",
+                  "value": "92998-3874",
+                  "type": "string"
+              }
+          },
+          "root.address.geo.lat": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root.address.geo",
+              "variable": {
+                  "name": "lat",
+                  "value": "-37.3159",
+                  "type": "string"
+              }
+          },
+          "root.address.geo.lng": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root.address.geo",
+              "variable": {
+                  "name": "lng",
+                  "value": "81.1496",
+                  "type": "string"
+              }
+          },
+          "root.phone": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root",
+              "variable": {
+                  "name": "phone",
+                  "value": "1-770-736-8031 x56442",
+                  "type": "string"
+              }
+          },
+          "root.website": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root",
+              "variable": {
+                  "name": "website",
+                  "value": "hildegard.org",
+                  "type": "string"
+              }
+          },
+          "root.company.name": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root.company",
+              "variable": {
+                  "name": "name",
+                  "value": "Romaguera-Crona",
+                  "type": "string"
+              }
+          },
+          "root.company.catchPhrase": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root.company",
+              "variable": {
+                  "name": "catchPhrase",
+                  "value": "Multi-layered client-server neural-net",
+                  "type": "string"
+              }
+          },
+          "root.company.bs": {
+              "saved": false,
+              "verified": false,
+              "parentPath": "root.company",
+              "variable": {
+                  "name": "bs",
+                  "value": "harness real-time e-markets",
+                  "type": "string"
+              }
+          }
+      }
+  },
+  "req2": {
+      "label": "Req2",
+      "test": false,
+      "testname": "",
+      "method": "GET",
+      "url": "{{env.jsonPlaceholderUrl}}/posts/{{Req1.root.id}}",
+      "headers": [
+          {
+              "name": "Content-Type",
+              "value": "application/json"
+          }
+      ],
+      "queryParams": [],
+      "reqBody": "",
+      "resBody": {
+          "userId": 1,
+          "id": 1,
+          "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+          "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+      },
+      "resCode": 200,
+      "resHeaders": {
+          "cache-control": "max-age=43200",
+          "content-type": "application/json; charset=utf-8",
+          "expires": "-1",
+          "pragma": "no-cache"
+      },
+      "parentPaths": {
+          "root": {
+              "verified": true,
+              "explicit": true
+          }
+      },
+      "variablePaths": {
+          "root.userId": {
+              "saved": false,
+              "verified": true,
+              "parentPath": "root",
+              "variable": {
+                  "name": "userId",
+                  "value": 1,
+                  "type": "integer"
+              }
+          },
+          "root.id": {
+              "saved": false,
+              "verified": true,
+              "parentPath": "root",
+              "variable": {
+                  "name": "id",
+                  "value": 1,
+                  "type": "integer"
+              }
+          },
+          "root.title": {
+              "saved": false,
+              "verified": true,
+              "parentPath": "root",
+              "variable": {
+                  "name": "title",
+                  "value": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                  "type": "string"
+              }
+          },
+          "root.body": {
+              "saved": false,
+              "verified": true,
+              "parentPath": "root",
+              "variable": {
+                  "name": "body",
+                  "value": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+                  "type": "string"
+              }
+          }
+      }
+  }
+}
