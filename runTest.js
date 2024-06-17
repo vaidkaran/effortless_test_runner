@@ -5,29 +5,14 @@ import requests from './reqData.json' assert {type: 'json'};
 import MochaTestRunner from './mochaTestRunner.js';
 import { flatten } from 'flat';
 import { sendRequest, assertValueInRes, assertPathPresenceInRes, sortPaths, getVerifiedParentPaths, getVerifiedVariablePathsWithValues } from 'effortless_test_utils';
+import axios from 'axios';
 
-const runTest = async ({ testTitle, testDataRequests, envVarsString}) => {
-  const json = {
-    a: 1,
-    'b.c': 2,
-  }
-  const testData = {
-    a: 1,
-    'b.c': 3,
-  }
-
-  const Test = Mocha.Test;
-  const Suite = Mocha.Suite;
-  const mocha = MochaTestRunner.getMochaInstance();
-
-  const suite = Suite.create(mocha.suite, testTitle);
+const getAssertArrayData = async (testData, envVarsString) => {
   const assertDataArray = [];
   const testExecutionData = {};
   testExecutionData.savedTestVarsWithValues = {};
 
-
-
-  for(const [reqId, reqData] of Object.entries(testDataRequests)) {
+  for(const [reqId, reqData] of Object.entries(testData.requests)) {
     const testResults = [];
     // TODO: should this be removed before the data comes to the cli runner?
     if (reqId === 'selectedReqId') continue;
@@ -83,20 +68,38 @@ const runTest = async ({ testTitle, testDataRequests, envVarsString}) => {
 
     assertDataArray.push(assertData);
   }
+  return assertDataArray;
+}
 
+const runTest = async (userData) => {
+  const { reqData, envData: {envVarsString} } = userData;
 
+  const Test = Mocha.Test;
+  const Suite = Mocha.Suite;
+  const mocha = MochaTestRunner.getMochaInstance();
 
-  const test = new Test('testtitle', () => {
-    assertDataArray.forEach((assertData) => {
-      assertData.pathPresence.forEach(({resBody, pathToVerify}) => {
-        assertPathPresenceInRes(resBody, pathToVerify);
-      });
-      assertData.variableValue.forEach(({resBody, variablePath, variableValue}) => {
-        assertValueInRes(resBody, variablePath, variableValue);
-      });
-    })
+  const suite = Suite.create(mocha.suite, 'testsuite');
+
+  const promises = Object.keys(reqData).map(async (fileId) => {
+    const testData= reqData[fileId];
+    if(!testData.test) return;
+
+    const assertDataArray = await getAssertArrayData(testData, envVarsString);
+
+    const test = new Test(testData.testname, () => {
+      assertDataArray.forEach((assertData) => {
+        assertData.pathPresence.forEach(({resBody, pathToVerify}) => {
+          assertPathPresenceInRes(resBody, pathToVerify);
+        });
+        assertData.variableValue.forEach(({resBody, variablePath, variableValue}) => {
+          assertValueInRes(resBody, variablePath, variableValue);
+        });
+      })
+    });
+    suite.addTest(test);
   });
-  suite.addTest(test);
+  await Promise.all(promises);
+
 
   let result;
   try {
@@ -110,8 +113,14 @@ const runTest = async ({ testTitle, testDataRequests, envVarsString}) => {
 }
 
 // export { runTest };
-runTest({
-  testTitle: 'mytesttitle',
-  testDataRequests: requests,
-  envVarsString: JSON.stringify({ "jsonPlaceholderUrl": "https://jsonplaceholder.typicode.com"})
-});
+// runTest({
+//   testTitle: 'mytesttitle',
+//   testDataRequests: requests,
+//   envVarsString: JSON.stringify({ "jsonPlaceholderUrl": "https://jsonplaceholder.typicode.com"})
+// });
+
+
+(async () => {
+  const res = await axios('http://localhost:8080/users');
+  await runTest(res.data);
+})();
